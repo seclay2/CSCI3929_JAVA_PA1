@@ -1,5 +1,6 @@
 package edu.cudenver.server;
 
+import edu.cudenver.logging.PrintLog;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,44 +9,41 @@ import java.net.Socket;
 
 public class ClientWorker implements Runnable {
 
-    private ServerApp server;
+    private ClientServer server;
     private Socket connection;
 
 
-    public ClientWorker(ServerApp server, Socket connection){
-        this.server=server;
-        this.connection=connection;
+    public ClientWorker(ClientServer server, Socket connection) {
+        this.server = server;
+        this.connection = connection;
     }
-
 
     @Override
     public void run() {
         try {
-            displayMessage("Getting Data Streams");
+            PrintLog.write("Getting Data Streams");
 
-            BufferedReader input =  getInputStream(connection);
-            PrintWriter    output = getOutputStream(connection);
+            BufferedReader input = getInputStream(connection);
+            PrintWriter output = getOutputStream(connection);
 
-            displayMessage("Processing Connection");
+            PrintLog.write("Processing Connection");
             try {
-                String message="";
+                String message = "";
                 do {
                     message = input.readLine();
-                    displayMessage(message);
+                    PrintLog.write(message);
 
                     String response = server.processClientMessage(message);
 
                     sendMessage(response, output);
-                } while (! message.equals("TERMINATE"));
-            }
-            catch (Exception e){
-                displayMessage("Client terminated CW.");
-                closeConnection(connection,input,output);
+                } while (!message.equals("TERMINATE"));
+            } catch (Exception e) {
+                PrintLog.write("Client terminated CW.");
+                closeConnection(connection, input, output);
             }
 
-        }
-        catch (IOException e){
-            displayMessage("\n================\nCannot get the Streams.");
+        } catch (IOException e) {
+            PrintLog.write("\n================\nCannot get the Streams.");
             e.printStackTrace();
         }
     }
@@ -53,12 +51,12 @@ public class ClientWorker implements Runnable {
 
     private PrintWriter getOutputStream(Socket connection) throws IOException {
 
-        return new PrintWriter(connection.getOutputStream(),true);
+        return new PrintWriter(connection.getOutputStream(), true);
 
     }
 
 
-    private BufferedReader getInputStream(Socket connection) throws IOException{
+    private BufferedReader getInputStream(Socket connection) throws IOException {
 
         InputStreamReader stream = new InputStreamReader(connection.getInputStream());
         return new BufferedReader(stream);
@@ -66,28 +64,20 @@ public class ClientWorker implements Runnable {
     }
 
 
-    private void closeConnection(Socket connection, BufferedReader input, PrintWriter output){
-        displayMessage("\nTerminating connection");
+    private void closeConnection(Socket connection, BufferedReader input, PrintWriter output) {
+        PrintLog.write("\nTerminating connection");
         try {
             output.close();
             input.close();
             connection.close();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void sendMessage(String msg, PrintWriter output){
+    private void sendMessage(String msg, PrintWriter output) {
         output.println(msg);
-        displayMessage("SERVER>> "+ msg.replace("\n",""));
+        PrintLog.write("SERVER>> " + msg.replace("\n", ""));
     }
-
-
-    private void displayMessage(String message){
-        System.out.println(message);
-    }
-
-
 }
