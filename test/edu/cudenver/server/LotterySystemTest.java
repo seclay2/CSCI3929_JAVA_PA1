@@ -1,20 +1,20 @@
 package edu.cudenver.server;
 
-import edu.cudenver.lottery.LotterySystem;
+import edu.cudenver.lottery.service.LotteryService;
 
 public class LotterySystemTest {
 
     public static void main (String[] args) {
 
-        LotterySystem lotterySystem = new LotterySystem();
+        LotteryService lotteryService = new LotteryService();
 
-        lotterySystem.createUser("3039635170", "Scott", "tigers07");
+        lotteryService.createUser("3039635170", "Scott", "tigers07");
 
-        if (lotterySystem.validateUser("3039635170", "tigers07")) {
+        if (lotteryService.validateUser("3039635170", "tigers07")) {
             System.out.println("valid");
         }
 
-        lotterySystem.getUser("3039635170");
+        lotteryService.getUser("3039635170");
 
     }
 }

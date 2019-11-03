@@ -1,16 +1,16 @@
-package edu.cudenver.lottery;
+package edu.cudenver.lottery.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Draw {
 
-    private Date date;
+    private LocalDate date;
     private int[] white;
     private int red;
 
     public Draw() {
-        date = new Date();
+        date = LocalDate.now();
         white = drawWhites();
         red = drawRed();
     }
@@ -32,12 +32,15 @@ public class Draw {
         return rand.nextInt(max) + 1;
     }
 
-    public int[] getPicks() {
-        int[] picks = new int[6];
-        picks = white;
-        picks[5] = red;
-        return picks;
+    public LocalDate getDate() {
+        return date;
     }
 
+    public int[] getWhite() {
+        return white;
+    }
 
+    public int getRed() {
+        return red;
+    }
 }

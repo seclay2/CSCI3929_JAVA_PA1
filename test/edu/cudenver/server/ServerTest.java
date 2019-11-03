@@ -46,7 +46,7 @@ public class ServerTest {
             }
 
             try {
-                String msg = "1234|T";
+                String msg = "T|1234";
                 output.println(msg);
                 displayMessage("CLIENT>> "+ msg);
 

@@ -1,4 +1,4 @@
-package edu.cudenver.lottery;
+package edu.cudenver.lottery.entity;
 
 import java.util.ArrayList;
 
@@ -30,16 +30,13 @@ public class User {
         return tickets;
     }
 
-    public void createTicket(int flag, int[] white, int red) {
-        if (flag == 1) {
-            tickets.add(new BasicTicket(white, red));
-        }
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
     }
 
     public boolean pwdMatch(String pwd) {
         return password.equals(pwd);
     }
-
 
     @Override
     public java.lang.String toString() {
