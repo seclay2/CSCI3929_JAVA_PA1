@@ -6,16 +6,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 
+/**
+ * Single thread worker for server-client communication
+ */
 public class ClientWorker implements Runnable {
 
     private ClientServer server;
     private Socket connection;
+    private long token;
 
 
     public ClientWorker(ClientServer server, Socket connection) {
         this.server = server;
         this.connection = connection;
+        this.token = new Random().nextLong();
     }
 
     @Override
@@ -33,7 +39,7 @@ public class ClientWorker implements Runnable {
                     message = input.readLine();
                     PrintLog.write(message);
 
-                    String response = server.processClientMessage(message);
+                    String response = server.processClientMessage(message, this);
 
                     sendMessage(response, output);
                 } while (!message.equals("TERMINATE"));
@@ -79,5 +85,13 @@ public class ClientWorker implements Runnable {
     private void sendMessage(String msg, PrintWriter output) {
         output.println(msg);
         PrintLog.write("SERVER>> " + msg.replace("\n", ""));
+    }
+
+    public long getToken() {
+        return token;
+    }
+
+    public void invalidateToken() {
+        token = new Random().nextLong();
     }
 }

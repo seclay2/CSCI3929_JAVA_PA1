@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * PrintLog class provides logging layer for server
+ */
 public class PrintLog {
     public static synchronized void write(String message) {
         try {

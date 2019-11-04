@@ -7,14 +7,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ClientApp extends Application {
+
+    private static Stage primaryStage;
+
+    public static Stage getPrimaryStage() {
+        return ClientApp.primaryStage;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
+        primaryStage = stage;
         Parent root =
-                FXMLLoader.load(getClass().getResource("ClientApp.fxml"));
+                FXMLLoader.load(getClass().getResource("login/LoginView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setTitle("Powerball Lottery");
-        stage.setScene(new Scene(root, 700, 400));
+        stage.setScene(scene);
         stage.show();
     }
 

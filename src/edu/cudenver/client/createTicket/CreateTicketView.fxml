@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<GridPane fx:controller="edu.cudenver.client.createTicket.CreateTicketController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center"
+          hgap="10" vgap="10">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+    <columnConstraints>
+        <ColumnConstraints minWidth="100" prefWidth="100" maxWidth="Infinity" halignment="RIGHT" />
+        <ColumnConstraints minWidth="200" prefWidth="200" maxWidth="Infinity" hgrow="ALWAYS" />
+    </columnConstraints>
+    <Text fx:id="note" style="-fx-font-size: 10" wrappingWidth="300" GridPane.columnIndex="1" GridPane.columnSpan="2" >
+        *White Numbers must be between 1 and 69, Powerball between 1 and 26
+    </Text>
+    <!-- Add Phone Label -->
+    <Label text="White Numbers : " GridPane.columnIndex="0"
+           GridPane.rowIndex="2" />
+    <!-- Add Email Text Field -->
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" >
+        <TextField fx:id="w1Field" prefHeight="40" />
+        <TextField fx:id="w2Field" prefHeight="40" />
+        <TextField fx:id="w3Field" prefHeight="40" />
+        <TextField fx:id="w4Field" prefHeight="40" />
+        <TextField fx:id="w5Field" prefHeight="40" />
+    </HBox>
+    <!-- Add Powerball Label -->
+    <Label text="Powerball : " GridPane.columnIndex="0"
+           GridPane.rowIndex="3" />
+    <!-- Add Powerball Text Field -->
+    <TextField fx:id="powerballField" prefHeight="40"
+               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <!-- Add powerplay radio button Label -->
+    <RadioButton fx:id="powerplayToggle" text="Powerplay" minWidth="100"
+                 GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <Button fx:id="submitButton" text="Submit"
+            prefWidth="100" prefHeight="40" defaultButton="true"
+            GridPane.columnIndex="1" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"
+            GridPane.halignment="CENTER">
+        <GridPane.margin>
+            <Insets top="20" bottom="20" />
+        </GridPane.margin>
+    </Button>
+    <Button fx:id="backButton" text="Back"
+            prefWidth="100" prefHeight="40"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"
+            GridPane.halignment="CENTER">
+        <GridPane.margin>
+            <Insets top="20" bottom="20" />
+        </GridPane.margin>
+    </Button>
+</GridPane>

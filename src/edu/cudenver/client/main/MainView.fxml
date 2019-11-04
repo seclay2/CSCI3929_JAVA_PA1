@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.cudenver.client.main.MainController">
+    <center>
+        <ListView fx:id="ticketInfoView" prefHeight="350" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets right="8.0" />
+            </BorderPane.margin>
+        </ListView>
+    </center>
+    <left>
+        <ListView fx:id="ticketListView" prefHeight="350" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets right="8.0" />
+            </BorderPane.margin>
+        </ListView>
+    </left>
+    <bottom>
+        <HBox spacing="20" >
+            <!-- Buttons -->
+            <Button fx:id="logoutButton" text="Logout"
+                    prefWidth="100" prefHeight="40" >
+            </Button>
+            <Button fx:id="refreshButton" text="Refresh"
+                    prefWidth="100" prefHeight="40" >
+            </Button>
+            <Button fx:id="newTicketButton" text="New Ticket"
+                    prefWidth="100" prefHeight="40" defaultButton="true">
+            </Button>
+
+        </HBox>
+    </bottom>
+    <padding>
+        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+    </padding>
+
+</BorderPane>

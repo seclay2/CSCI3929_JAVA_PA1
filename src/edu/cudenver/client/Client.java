@@ -4,6 +4,9 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Client class provides client-server communication layer
+ */
 public class Client {
 
     private int port;
@@ -15,6 +18,9 @@ public class Client {
     private BufferedReader input      = null;
     private PrintWriter    output     = null;
 
+    private long token;
+    private String userId;
+
 
     public Client(){
         this("127.0.0.1",50000);
@@ -24,12 +30,11 @@ public class Client {
         this.serverIp=serverIp;
         this.port=port;
         isConnected=false;
+        token = 0;
+        userId = "";
     }
 
-
-
     public boolean isConnected(){ return isConnected; }
-
 
     public void connect() {
         try {
@@ -59,6 +64,7 @@ public class Client {
             output.close();
             input.close();
             clientSocket.close();
+            token = 0;
         }
         catch (IOException|NullPointerException e){
             e.printStackTrace();
@@ -67,8 +73,6 @@ public class Client {
             this.isConnected=false;
         }
     }
-
-
 
     public String sendMessage(String msg) throws IOException{
         output.println(msg);
@@ -80,13 +84,28 @@ public class Client {
         return srvResponse;
     }
 
-
     private void displayMessage(String message){
         System.out.println(message);
     }
 
-    public static void main(String[] args) {
+    public String[] processCmd(String msg) throws Exception {
+        return new String[]{"hello"};
+    }
 
+    public void setToken(long token) {
+        this.token = token;
+    }
+
+    public long getToken() {
+        return token;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
 }

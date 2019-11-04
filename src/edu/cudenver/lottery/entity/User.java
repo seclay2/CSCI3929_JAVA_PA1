@@ -26,20 +26,50 @@ public class User {
 
     public String getPwd() { return password; }
 
+    /**
+     * gets 10 most recent tickets
+     * @return
+     */
     public ArrayList<Ticket> getTickets() {
-        return tickets;
+        ArrayList<Ticket> lastTen = new ArrayList<>();
+
+        if (tickets.size() <= 10) {
+            return tickets;
+        } else {
+            for (int i = tickets.size()-1; i >= tickets.size()-11; i--) {
+                lastTen.add(tickets.get(i));
+            }
+            return lastTen;
+        }
     }
 
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
 
+    /**
+     * checks password input matches with password stored
+     * @param pwd
+     * @return
+     */
     public boolean pwdMatch(String pwd) {
         return password.equals(pwd);
     }
 
     @Override
-    public java.lang.String toString() {
-        return getName();
+    public String toString() {
+        StringBuilder sb = new StringBuilder(phone);
+        sb.append("|");
+        sb.append(name);
+        sb.append("|");
+        sb.append(password);
+        sb.append("|");
+        for (Ticket t : tickets) {
+            sb.append(t.toString());
+            sb.append("#");
+        }
+        sb.delete(sb.length()-1, sb.length());
+
+        return sb.toString();
     }
 }

@@ -1,10 +1,11 @@
 package edu.cudenver.server;
 
-import edu.cudenver.lottery.entity.Draw;
-import edu.cudenver.lottery.service.LotteryService;
+import edu.cudenver.lottery.LotteryService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,16 +18,6 @@ public class ServerApp {
 
     public ServerApp() {
         this.loadFile();
-    }
-
-    /**
-     * Main program that launches the Server. Can and should be moved out to another class.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        ServerApp server = new ServerApp();
-        server.runServer();
     }
 
     /**
@@ -62,12 +53,13 @@ public class ServerApp {
 
                             case "sd":
                                 displayMessage(true, "scheduling draw...");
+                                //TODO schedule draw
                                 displayMessage("draw scheduled");
                                 break;
 
                             case "dn":
                                 displayMessage(true, "drawing now...");
-                                lotteryService.generateTicketPrizes(new Draw());
+                                displayMessage(lotteryService.runDraw());
                                 displayMessage("draw complete");
                                 break;
 
@@ -127,6 +119,8 @@ public class ServerApp {
 
     private void loadFile() {
         try {
+
+            //TODO load files
             Scanner file = new Scanner(new File("default.txt"));
             displayMessage("Loading existing Powerball data...");
             while (file.hasNextLine()) {
@@ -143,7 +137,12 @@ public class ServerApp {
 
     private void saveFile() {
         displayMessage(true, "saving current state...");
-        displayMessage("save complete.");
+        try {
+            lotteryService.toFile();
+            displayMessage("save complete.");
+        } catch (IOException e) {
+            displayMessage(false, "Could not write to file");
+        }
     }
 
     private void displayMessage(String message) {
@@ -156,5 +155,15 @@ public class ServerApp {
         }
 
         System.out.println(message);
+    }
+
+    /**
+     * Main program that launches the Server.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        ServerApp server = new ServerApp();
+        server.runServer();
     }
 }

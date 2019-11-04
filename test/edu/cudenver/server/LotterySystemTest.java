@@ -1,6 +1,6 @@
 package edu.cudenver.server;
 
-import edu.cudenver.lottery.service.LotteryService;
+import edu.cudenver.lottery.LotteryService;
 
 public class LotterySystemTest {
 

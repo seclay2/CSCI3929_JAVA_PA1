@@ -14,6 +14,8 @@ public class ServerTest {
 
     public static void main(String[] args) {
 
+        long token = 0;
+
         try {
             displayMessage("Attempting connection");
 
@@ -39,6 +41,33 @@ public class ServerTest {
                 displayMessage("CLIENT>> "+ msg);
 
                 String srvResponse = input.readLine();
+                String[] arg = srvResponse.split("\\|");
+                token = Long.parseLong(arg[2]);
+                displayMessage("SERVER>> "+ srvResponse);
+
+            } catch (IOException e) {
+                displayMessage("IO err");
+            }
+
+
+            /*try {
+                String msg = "O|" + token + "|3039635914";
+                output.println(msg);
+                displayMessage("CLIENT>> "+ msg);
+
+                String srvResponse = input.readLine();
+                displayMessage("SERVER>> "+ srvResponse);
+
+            } catch (IOException e) {
+                displayMessage("IO err");
+            }*/
+
+            try {
+                String msg = "N|"+token+"|3039635914|55|7|25|33|45|12|true";
+                output.println(msg);
+                displayMessage("CLIENT>> "+ msg);
+
+                String srvResponse = input.readLine();
                 displayMessage("SERVER>> "+ srvResponse);
 
             } catch (IOException e) {
@@ -46,7 +75,56 @@ public class ServerTest {
             }
 
             try {
-                String msg = "T|1234";
+                String msg = "N|"+token+"|3039635914|5|1|7|32|64|23|false";
+                output.println(msg);
+                displayMessage("CLIENT>> "+ msg);
+
+                String srvResponse = input.readLine();
+                displayMessage("SERVER>> "+ srvResponse);
+
+            } catch (IOException e) {
+                displayMessage("IO err");
+            }
+
+            try {
+                String msg = "N|"+token+"|3039635914|60|54|43|32|21|19|false";
+                output.println(msg);
+                displayMessage("CLIENT>> "+ msg);
+
+                String srvResponse = input.readLine();
+                displayMessage("SERVER>> "+ srvResponse);
+
+            } catch (IOException e) {
+                displayMessage("IO err");
+            }
+
+
+            try {
+                String msg = "T|"+token+"|3039635914";
+                output.println(msg);
+                displayMessage("CLIENT>> "+ msg);
+
+                String srvResponse = input.readLine();
+                displayMessage("SERVER>> "+ srvResponse);
+
+            } catch (IOException e) {
+                displayMessage("IO err");
+            }
+
+            try {
+                String msg = "U|3039635914|Scott|tigers07";
+                output.println(msg);
+                displayMessage("CLIENT>> "+ msg);
+
+                String srvResponse = input.readLine();
+                displayMessage("SERVER>> "+ srvResponse);
+
+            } catch (IOException e) {
+                displayMessage("IO err");
+            }
+
+            try {
+                String msg = "U|3038767564|Jeff|password";
                 output.println(msg);
                 displayMessage("CLIENT>> "+ msg);
 
@@ -62,7 +140,7 @@ public class ServerTest {
 
         }
         finally{
-            displayMessage("Connected");
+            //displayMessage("Connected");
         }
 
     }
